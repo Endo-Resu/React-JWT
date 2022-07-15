@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const router = require('./router/index');
 
 const PORT = process.env.PORT || 5000;
-const app = express();
+const app = express()
 
 app.use(express.json);
 app.use(cookieParser);
@@ -20,10 +20,10 @@ const start = async () => {
             useUnifiedTopology: true,
         })
 
-        app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`));
+        app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`))
     } catch (e) {
         console.log(e)
     }
 }
 
-start();
+start()
