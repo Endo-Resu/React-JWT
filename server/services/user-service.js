@@ -4,6 +4,7 @@ const uuid = require('uuid');
 const mailService = require('../services/mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../dtos/user.dto');
+const {Error} = require("mongoose");
 
 class UserService {
     async registration(email, password) {
@@ -25,6 +26,15 @@ class UserService {
             ...tokens,
             user: userDto
         }
+    }
+
+    async activate(activationLink) {
+        const user = await UserModel.findOne({activationLink})
+        if (!user) {
+            throw new Error('Некорректная ссылка активации')
+        }
+        user.isActivated = true;
+        await user.save();
     }
 }
 
